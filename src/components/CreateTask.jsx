@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { v4 as uuidv4 } from 'uuid';
 
 const CreateTask = ({ tasks, setTasks }) => {
@@ -11,15 +12,22 @@ const CreateTask = ({ tasks, setTasks }) => {
 const handleSubmit = (e) =>
     {
         e.preventDefault() // prevent page from refreshing
-        if(task.name.length < 3) return
+        if (task.name.length < 3 ) 
+            return toast.error("Minimum Length Should Be 3 Charecters");     
+        if (task.name.length > 100 ) 
+            return toast.error("Maximum Length Shouldnt Be greater than 100 Charecters");     
         setTasks((prev)=>
         {
             const  list = [...prev,task]
             localStorage.setItem('tasks',JSON.stringify(list))
             return list
         }) /// this fun will update our state
-        
-
+        toast.success("Task Created Successfully")
+        setTask({
+            id:"",
+            name:"",
+            status:"todo"
+        })//Clear Input Fiedl
     }
   return (
     <form onSubmit={handleSubmit}>
