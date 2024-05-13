@@ -7,11 +7,19 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([{
+    id:"234234",
+        name:"Drag me",
+        status:"todo"
+  }]);
   
   useEffect(()=>
   {
-setTasks(JSON.parse(localStorage.getItem('tasks')))
+    const stored = JSON.parse(localStorage.getItem('tasks'))
+    if(stored)
+      {
+        setTasks(stored)
+      }
   },[])
 
   return (
