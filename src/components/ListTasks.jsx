@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const ListTasks = ({ tasks, setTasks }) => {
   const [todos, setTodos] = useState([]);
@@ -21,7 +22,7 @@ const ListTasks = ({ tasks, setTasks }) => {
         <Section
           key={index}
           status={status}
-          task={tasks}
+          tasks={tasks}
           setTasks={setTasks}
           todos={todos}
           inProgress={inProgress}
@@ -35,7 +36,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 export default ListTasks;
 
 
-const Section = ({ status, tasks, setTask, todos, inProgress, closed }) => {
+const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
   let text = "todo";
   let bg = "bg-blue-500";
   let taskToMap = todos;
@@ -53,7 +54,7 @@ const Section = ({ status, tasks, setTask, todos, inProgress, closed }) => {
   return (
     <div className={`w-64`}>
       <Header text={text} bg={bg} count={taskToMap.length} />
-      {taskToMap.length > 0 && taskToMap.map(task=> <Task key={task.id} tasks = {tasks} setTask = {setTask} task = {task} />)}
+      {taskToMap.length > 0 && taskToMap.map(task=> <Task key={task.id} tasks = {tasks} setTask = {setTasks} task = {task} />)}
     </div>
   );
 };
@@ -73,12 +74,21 @@ const Header = ({ text, bg, count }) => {
 
 
 const Task = ({ task,tasks,setTask }) => {
-    console.log
+
     const handleDelete = (id) =>
         {
-            
-            const fTask = tasks.filter(t=>t.id !==id)
-            console.log(fTask);
+            if(tasks)
+                {
+                    
+                    const fTask = tasks.filter(t=>t.id !==id)
+                    console.log(fTask)
+                    setTask(fTask)
+                    toast("task removed",{
+                        icon:"❌"
+                    })
+
+                }
+                console.log("no tasks")
         }
 
 
@@ -86,8 +96,9 @@ const Task = ({ task,tasks,setTask }) => {
     <div className={`relative p-4 mt-8 shadow-lg rounded-2xl     cursor-grab`}>
         <p>{task.name}</p>
         <button id={task.id} onClick={()=>handleDelete(task.id)} className="absolute bottom-2 right-1 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
+  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm3 10.5a.75.75 0 0 0 0-1.5H9a.75.75 0 0 0 0 1.5h6Z" clipRule="evenodd" />
 </svg>
+
 </button>
     </div>
   );

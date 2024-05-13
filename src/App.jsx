@@ -11,7 +11,6 @@ function App() {
   {
 setTasks(JSON.parse(localStorage.getItem('tasks')))
   },[])
-  console.log(tasks)
 
   return (
     <div className="bg-fuchsia-800 w-screen h-screen flex flex-col items-center  gap-16 pt-32">
