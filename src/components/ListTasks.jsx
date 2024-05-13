@@ -34,9 +34,10 @@ const ListTasks = ({ tasks, setTasks }) => {
 
 export default ListTasks;
 
+
 const Section = ({ status, tasks, setTask, todos, inProgress, closed }) => {
   let text = "todo";
-  let bg = "bg-slate-500";
+  let bg = "bg-blue-500";
   let taskToMap = todos;
 
   if (status === "inprogress") {
@@ -59,7 +60,7 @@ const Section = ({ status, tasks, setTask, todos, inProgress, closed }) => {
 
 const Header = ({ text, bg, count }) => {
   return (
-    <div className={`${bg} bg-slate-500 flex items-center h-12 pl-4 rounded-md uppercase text-sm`}>
+    <div className={`${bg} flex items-center h-12 pl-4 rounded-md uppercase text-sm`}>
       <h1>{text}</h1>
       <div className="ml-2 bg-white h-5 w-5 text-black rounded-full flex items-center justify-center">
         {count}
@@ -70,10 +71,24 @@ const Header = ({ text, bg, count }) => {
 
 
 
+
 const Task = ({ task,tasks,setTask }) => {
+    console.log
+    const handleDelete = (id) =>
+        {
+            
+            const fTask = tasks.filter(t=>t.id !==id)
+            console.log(fTask);
+        }
+
+
   return (
-    <div className={` bg-slate-500 flex items-center h-12 pl-4 rounded-md uppercase text-sm`}>
+    <div className={`relative p-4 mt-8 shadow-lg rounded-2xl     cursor-grab`}>
         <p>{task.name}</p>
+        <button id={task.id} onClick={()=>handleDelete(task.id)} className="absolute bottom-2 right-1 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
+</svg>
+</button>
     </div>
   );
 };
