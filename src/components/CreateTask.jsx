@@ -31,7 +31,7 @@ const handleSubmit = (e) =>
   return (
     <form onSubmit={handleSubmit}>
       <input className="border-2 rounded-lg mr-4 h-12" type="text" value={task.name} onChange={(e)=>setTask({...task,id:uuidv4(),name:e.target.value})} />
-      <button className="bg-red-600 rounded-md px-4 h-12 text-white">Create Task</button>
+      <button className="bg-green-950 hover:bg-green-800 rounded-md px-4 h-12 text-white">Create Task</button>
     </form>
   );
 };
