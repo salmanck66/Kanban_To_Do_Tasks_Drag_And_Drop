@@ -6,7 +6,7 @@ const ListTasks = ({ tasks, setTasks, setTaskToEdit }) => {
   const statuses = ["todo", "inprogress", "closed"];
 
   return (
-    <div className="flex gap-16">
+    <div className="flex gap-16 flex-col sm:flex-row">
       {statuses.map((status, index) => (
         <Section
           key={index}
