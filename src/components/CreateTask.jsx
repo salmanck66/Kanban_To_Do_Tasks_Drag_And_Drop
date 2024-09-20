@@ -55,7 +55,7 @@ const CreateTask = ({ tasks, setTasks, taskToEdit, setTaskToEdit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="flex justify-center items-center flex-col gap-2 sm:flex-row" onSubmit={handleSubmit}>
             <input className="border-2 rounded-lg mr-4 h-12" type="text" value={task.name} onChange={handleChange} />
             <button className="bg-green-950 hover:bg-green-800 rounded-md px-4 h-12 text-white">
                 {isEditing ? "Update Task" : "Create Task"}
